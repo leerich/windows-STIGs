@@ -1,0 +1,15 @@
+[windows:children]
+tag_Name_windows_member_server{{ aws_suffix }}
+tag_Name_windows_domain_controller{{ aws_suffix }}
+
+[tag_Name_windows_member_server{{ aws_suffix }}]
+{% for server in groups['tag_Name_windows_member_server' + aws_suffix ] %}
+{{ hostvars[server].os_label }} ansible_host={{ hostvars[server].ansible_host }} ansible_password={{ hostvars[server].ansible_password }}
+{% endfor %}
+
+[tag_Name_windows_domain_controller{{ aws_suffix }}]
+{% for server in groups['tag_Name_windows_domain_controller' + aws_suffix ] %}
+{{ hostvars[server].os_label }} ansible_host={{ hostvars[server].ansible_host }} ansible_password={{ hostvars[server].ansible_password }}
+{% endfor %}
+
+

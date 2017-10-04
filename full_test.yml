@@ -1,0 +1,3 @@
+- include: win08R2.yml
+- include: win12dc.yml
+- include: win12ms.yml

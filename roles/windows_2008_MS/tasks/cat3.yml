@@ -1,0 +1,640 @@
+- name: "LOW | V-1075 | AUDIT | The system allows shutdown from the logon dialog box."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1075
+
+- name: "LOW | V-1075 | PATCH | The system allows shutdown from the logon dialog box."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1075
+
+- name: "LOW | V-1076 | AUDIT | System information backups are not created, updated, and protected according to DISA requirements."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1076
+
+- name: "LOW | V-1076 | PATCH | System information backups are not created, updated, and protected according to DISA requirements."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1076
+
+- name: "LOW | V-1090 | AUDIT | Caching of logon credentials must be limited."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1090
+
+- name: "LOW | V-1090 | PATCH | Caching of logon credentials must be limited."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1090
+
+- name: "LOW | V-1112 | AUDIT | Outdated or unused accounts must be removed from the system or disabled."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1112
+
+- name: "LOW | V-1112 | PATCH | Outdated or unused accounts must be removed from the system or disabled."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1112
+
+- name: "LOW | V-1126 | AUDIT | The Recycle Bin on a server must be configured to immediately delete files."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1126
+
+- name: "LOW | V-1126 | PATCH | The Recycle Bin on a server must be configured to immediately delete files."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1126
+
+- name: "LOW | V-1128 | AUDIT | Security configuration tools or equivalent processes must be used to configure and maintain platforms for security compliance."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1128
+
+- name: "LOW | V-1128 | PATCH | Security configuration tools or equivalent processes must be used to configure and maintain platforms for security compliance."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1128
+
+- name: "LOW | V-1135 | AUDIT | Printer share permissions are not configured as recommended."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1135
+
+- name: "LOW | V-1135 | PATCH | Printer share permissions are not configured as recommended."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1135
+
+- name: "LOW | V-1136 | AUDIT | Users must be forcibly disconnected when their logon hours expire."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1136
+
+- name: "LOW | V-1136 | PATCH | Users must be forcibly disconnected when their logon hours expire."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1136
+
+- name: "LOW | V-1151 | AUDIT | Print driver installation privilege is not restricted to administrators."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1151
+
+- name: "LOW | V-1151 | PATCH | Print driver installation privilege is not restricted to administrators."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1151
+
+- name: "LOW | V-1158 | AUDIT | The Recovery Console SET command must be disabled."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1158
+
+- name: "LOW | V-1158 | PATCH | The Recovery Console SET command must be disabled."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1158
+
+- name: "LOW | V-1165 | AUDIT | The computer account password is prevented from being reset."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1165
+
+- name: "LOW | V-1165 | PATCH | The computer account password is prevented from being reset."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1165
+
+- name: "LOW | V-1172 | AUDIT | Users are not warned in advance that their passwords will expire."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1172
+
+- name: "LOW | V-1172 | PATCH | Users are not warned in advance that their passwords will expire."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1172
+
+- name: "LOW | V-1173 | AUDIT | The default permissions of Global system objects are not increased."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1173
+
+- name: "LOW | V-1173 | PATCH | The default permissions of Global system objects are not increased."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1173
+
+- name: "LOW | V-1174 | AUDIT | The amount of idle time required before suspending a session must be properly set."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-1174
+
+- name: "LOW | V-1174 | PATCH | The amount of idle time required before suspending a session must be properly set."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-1174
+
+- name: "LOW | V-3373 | AUDIT | The maximum age for machine account passwords is not set to requirements."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-3373
+
+- name: "LOW | V-3373 | PATCH | The maximum age for machine account passwords is not set to requirements."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-3373
+
+- name: "LOW | V-3472 | AUDIT | The system is configured to use an unauthorized time server."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-3472
+
+- name: "LOW | V-3472 | PATCH | The system is configured to use an unauthorized time server."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-3472
+
+- name: "LOW | V-4108 | AUDIT | The system must generate an audit event when the audit log reaches a percentage of full threshold."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4108
+
+- name: "LOW | V-4108 | PATCH | The system must generate an audit event when the audit log reaches a percentage of full threshold."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4108
+
+- name: "LOW | V-4110 | AUDIT | The system is configured to allow IP source routing."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4110
+
+- name: "LOW | V-4110 | PATCH | The system is configured to allow IP source routing."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4110
+
+- name: "LOW | V-4111 | AUDIT | The system is configured to redirect ICMP."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4111
+
+- name: "LOW | V-4111 | PATCH | The system is configured to redirect ICMP."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4111
+
+- name: "LOW | V-4112 | AUDIT | The system is configured to detect and configure default gateway addresses."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4112
+
+- name: "LOW | V-4112 | PATCH | The system is configured to detect and configure default gateway addresses."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4112
+
+- name: "LOW | V-4113 | AUDIT | The system is configured for a greater keep-alive time than recommended."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4113
+
+- name: "LOW | V-4113 | PATCH | The system is configured for a greater keep-alive time than recommended."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4113
+
+- name: "LOW | V-4116 | AUDIT | The system must be configured to ignore NetBIOS name release requests except from WINS servers."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4116
+
+- name: "LOW | V-4116 | PATCH | The system must be configured to ignore NetBIOS name release requests except from WINS servers."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4116
+
+- name: "LOW | V-4438 | AUDIT | The system must limit how many times unacknowledged TCP data is retransmitted."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4438
+
+- name: "LOW | V-4438 | PATCH | The system must limit how many times unacknowledged TCP data is retransmitted."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4438
+
+- name: "LOW | V-4442 | AUDIT | This check verifies that Windows is configured to have password protection take effect within a limited time frame when the screen saver becomes active."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4442
+
+- name: "LOW | V-4442 | PATCH | This check verifies that Windows is configured to have password protection take effect within a limited time frame when the screen saver becomes active."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4442
+
+- name: "LOW | V-4445 | AUDIT | Optional Subsystems are permitted to operate on the system."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-4445
+
+- name: "LOW | V-4445 | PATCH | Optional Subsystems are permitted to operate on the system."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-4445
+
+- name: "LOW | V-11806 | AUDIT | The system is configured to allow the display of the last user name on the logon screen."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-11806
+
+- name: "LOW | V-11806 | PATCH | The system is configured to allow the display of the last user name on the logon screen."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-11806
+
+- name: "LOW | V-14232 | AUDIT | IPSec Exemptions are limited."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-14232
+
+- name: "LOW | V-14232 | PATCH | IPSec Exemptions are limited."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-14232
+
+- name: "LOW | V-15672 | AUDIT | Event Viewer Events.asp links must be turned off."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-15672
+
+- name: "LOW | V-15672 | PATCH | Event Viewer Events.asp links must be turned off."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-15672
+
+- name: "LOW | V-15673 | AUDIT | Internet Connection Wizard ISP Downloads"
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-15673
+
+- name: "LOW | V-15673 | PATCH | Internet Connection Wizard ISP Downloads"
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-15673
+
+- name: "LOW | V-15675 | AUDIT | Windows Registration Wizard"
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-15675
+
+- name: "LOW | V-15675 | PATCH | Windows Registration Wizard"
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-15675
+
+- name: "LOW | V-15676 | AUDIT | Order Prints Online"
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-15676
+
+- name: "LOW | V-15676 | PATCH | Order Prints Online"
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-15676
+
+- name: "LOW | V-15680 | AUDIT | The classic logon screen must be required for user logons."
+  win_command: true
+  register: result
+  check_mode: no
+  changed_when: no
+  ignore_errors: yes
+  tags:
+      - cat3
+      - low
+      - audit
+      - V-15680
+
+- name: "LOW | V-15680 | PATCH | The classic logon screen must be required for user logons."
+  win_command: true
+  tags:
+      - cat3
+      - low
+      - patch
+      - V-15680
+

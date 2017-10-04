@@ -1,0 +1,19 @@
+[windows:vars]
+ansible_winrm_server_cert_validation=ignore
+ansible_user=Administrator
+ansible_connection=winrm
+ansible_password=Airborne200
+
+[windows:children]
+win2008r2
+win2012dc
+win2012ms
+
+[win2008r2]
+35.166.53.12 ansible_password=KFcd.hTng!
+
+[win2012ms]
+35.162.70.11 ansible_password=5Q?WiMpgst
+
+[win2012dc]
+35.162.158.32 ansible_password=-CCiJr$FxaJ

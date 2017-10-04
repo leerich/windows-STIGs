@@ -1,0 +1,132 @@
+---
+# tasks file for windows_cluster
+- name: Set up ec2 security group
+  ec2_group:
+    region: "{{ aws_region }}"
+    vpc_id: "{{ aws_vpc_id }}"
+    name: WindowsAutomationAuto
+    description: "Security rule for Windows clustering"
+    purge_rules: yes
+    rules:
+      - proto: tcp
+        from_port: 5986 
+        to_port: 5986 
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 5985 
+        to_port: 5985 
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 3389 
+        to_port: 3389 
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 5985 
+        to_port: 5985 
+      - proto: all
+        group_name: WindowsAutomationAuto 
+  tags:
+    - sg
+
+
+- name: Spin up Windows VMs
+  ec2:
+    wait: yes
+    assign_public_ip: yes
+    region: "{{ aws_region }}"
+    exact_count: "{{ item.quantity }}"
+    count_tag:
+      Name: "{{ item.function }}{{ suffix }}"
+      os: "{{ item.os }}"
+    image: "{{ item.ami_id }}"
+    group: WindowsAutomationAuto
+    instance_tags:
+      Name: "{{ item.function }}{{ suffix }}"
+      os: "{{ item.os }}"
+    key_name: "{{ key_name }}" 
+    instance_type: "{{ item.type }}"
+    vpc_subnet_id: "{{ aws_subnet_id }}"
+    user_data: |
+      <powershell>
+      iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
+      </powershell>
+  with_items: "{{ cluster_nodes }}"
+  register: win_cluster
+  tags:
+    - ec2
+
+- name: show cluster data
+  debug:
+    var: win_cluster
+    verbosity: 2
+
+- name: Wait for nodes to be responsive
+  wait_for:
+    port: 5986
+    host: "{{ item.tagged_instances[0].public_ip }}"
+  with_items: "{{ win_cluster.results }}"
+
+- name: Set variable for ec2 instance ids
+  set_fact:
+    instance_ids: "{{ win_cluster.results | sum(attribute='tagged_instances', start=[]) | map(attribute='id') | list }}"
+
+- name: Set variable for ec2 instance IP addresses
+  set_fact:
+    instance_ips: "{{ win_cluster.results | sum(attribute='tagged_instances', start=[]) | map(attribute='public_ip')| list}}"
+
+- name: Set variable for ec2 instance IP private addresses
+  set_fact:
+    instance_pips: "{{ win_cluster.results | sum(attribute='tagged_instances', start=[]) | map(attribute='private_ip')| list}}"
+
+- name: Set variable for tags
+  set_fact:
+   instance_tags: "{{ win_cluster.results | sum(attribute='tagged_instances', start=[]) | map(attribute='tags')| list}}"
+
+- name: get windows passwords 
+  ec2_win_password:
+    region: us-west-2
+    key_file: "{{ private_key }}" 
+    instance_id: "{{ item }}"
+  register: win_passwords
+  with_items: "{{ instance_ids }}"
+
+- name: Set variable for the windows passwords
+  set_fact: 
+    win_pwds: "{{win_passwords.results|map(attribute='win_password') | list}}"
+
+- name: debug
+  debug:
+    msg: "{{ item.0  }}"
+  with_together:
+    - "{{ instance_tags }}"
+
+- name: Debug Lists
+  debug:
+    msg: |
+       {{ item.0 }}
+       tag_Name_{{ item.3.Name }}
+       {{ item.1 }}
+       {{ item.2 }}
+  with_together:
+    - "{{ instance_ids }}"
+    - "{{ win_pwds }}"
+    - "{{ instance_ips }}"
+    - "{{ instance_tags }}"
+
+
+- name: Update in memory inventory with new windows hosts
+  add_host:
+    instance_id: "{{ item.0 }}"
+    groups: tag_Name_{{ item.3.Name }},windows
+    os_label: "{{ item.3.os }}"
+    private_ip: "{{ item.4 }}"
+    ansible_password: "{{ item.1 }}"
+    #ansible_password: "{{ item.1 }}"
+    ansible_host: "{{ item.2 }}"
+    name: "{{ item.2 }}"
+  with_together:
+    - "{{ instance_ids }}"
+    - "{{ win_pwds }}"
+    - "{{ instance_ips }}"
+    - "{{ instance_tags }}"
+    - "{{ instance_pips }}"

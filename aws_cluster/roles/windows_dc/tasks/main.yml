@@ -1,0 +1,26 @@
+---
+# tasks file for windows_dc
+- name: Install features for domain controller
+  win_feature:
+    name: "{{ item }}"
+    include_sub_features: yes
+    include_management_tools: yes
+    state: present
+    restart: yes
+  register: features
+  with_items:
+    - AD-Domain-Services
+    - RSAT-AD-Tools
+    - GPMC
+
+- name: wait for DC to come back
+  wait_for:
+    port: 5986
+    host: "{{ inventory_hostname }}"
+  when: features|changed
+  delegate_to: localhost
+
+- name: Install Forest
+  script: forest.ps1
+  tags:
+    - forest

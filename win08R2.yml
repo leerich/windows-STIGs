@@ -1,0 +1,5 @@
+- name: Harden windows 2008R2 member server
+  hosts: win2008r2
+  strategy: free
+  roles:
+    - role: windows_2008R2_MS

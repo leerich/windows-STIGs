@@ -1,0 +1,5 @@
+- name: Harden windows 2012 member server
+  hosts: win2012ms
+  strategy: free
+  roles:
+    - role: windows_2012_MS 

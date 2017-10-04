@@ -1,0 +1,110 @@
+- name: Provision Infrastructure
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars:
+      aws_key_name: jdav-win-INSECURE
+  roles:
+    - role: windows_cluster
+      private_key: ./insecure-CI
+      aws_region: us-west-2
+      aws_vpc_id: vpc-7c03ad19
+      key_name: "{{ aws_key_name }}"
+      suffix: "{{ aws_suffix }}"
+      aws_subnet_id: subnet-af9111ca
+      cluster_nodes:
+        - function: windows_domain_controller
+          # 2012
+          os: 2012_dc
+          ami_id: ami-2827f548
+          type: t2.medium
+          quantity: 1
+        - function: windows_member_server
+          # 2012
+          os: 2012_ms
+          ami_id: ami-2827f548
+          type: t2.medium
+          quantity: 1
+        - function: windows_member_server
+          os: 2008R2_ms
+          # 2008R2
+          ami_id: ami-8505d7e5
+          type: t2.medium
+          quantity: 1
+
+  post_tasks:
+    - name: Template out new inventory file
+      template:
+        src: inventory.j2
+        dest: ./generated_hosts
+
+  tags:
+    - infra
+
+
+- name: Setup Domain Controller
+  hosts: tag_Name_windows_domain_controller{{ aws_suffix }}
+  gather_facts: no
+  tasks:
+    - name: Test Forest 
+      win_domain:
+        forest_root_dns_domain: elite.local 
+        safe_mode_admin_password: Airborne200
+      register: forest_out
+
+    - win_reboot:
+      when: forest_out|changed
+
+    - name: test DC promo
+      win_domain_controller:
+        dns_domain_name: elite.local
+        domain_admin_user: Administrator@elite.local
+        domain_admin_pass: "{{ ansible_password }}" 
+        safe_mode_pass: Airborne200
+        state: domain_controller
+  tags:
+    - dc
+
+
+- name: Setup Member Server 
+  hosts: tag_Name_windows_member_server{{ aws_suffix }}
+  strategy: free
+  gather_facts: no
+  tasks:
+    - name: Ensure member servers point to DC for dns
+      win_dns_client:
+        adapter_names: "*"
+        ipv4_addresses: "{{ hostvars[groups['tag_Name_windows_domain_controller' + aws_suffix][0]].private_ip }}" 
+      tags:
+        - dns
+
+    - name: Ensure member servers are joined
+      win_domain_membership:
+        dns_domain_name: elite.local
+        domain_admin_user: Administrator@elite.local
+        domain_admin_pass: "{{ hostvars[groups['tag_Name_windows_domain_controller' + aws_suffix][0]].ansible_password }}"
+        state: domain
+  tags:
+    - ms
+
+#- name: Set common admin password
+#  gather_facts: no 
+#  hosts: windows:tag_Name_windows*
+#  tasks:
+  #    - name: Set password for Administrator
+  #    win_user:
+    #      name: Administrator
+    #    password: Airborne200
+    #    update_password: always
+    #  async: 20 
+    #  poll: 0
+    #
+    #- name: Update Inventory
+    #  set_fact:
+      #    ansible_password: Airborne200
+      #
+      #- pause:
+      #  seconds: 10 
+      #tags:
+        #- pwd
+

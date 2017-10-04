@@ -1,0 +1,9 @@
+The SCIF.ivenn file can be used with the tool located at http://www.interactivenn.net/
+
+Import that save file to view the breakdown of where the STIGs intersect with the other OS's.
+OS's represented in the save should be labeled. Initial save includes 2k8_ms, 2k8r2_ms, 2k12_ms, and 2k12_dc.
+
+Their respective STIGs can be found at http://iase.disa.mil/stigs/os/windows/Pages/index.aspx for the latest
+versions. To get just the list of STIGs from the xml to use in the venn diagram tool :
+1. Pretty print the xml
+2. grep "Group id=\"V-" pretty_printed_stigs.xml | cut -d ' ' -f 2 | cut -d \" -f 2

@@ -1,0 +1,5 @@
+- name: Harden windows 2012 Domain Controller
+  hosts: win2012dc
+  strategy: free
+  roles:
+    - role: windows_2012_DC 

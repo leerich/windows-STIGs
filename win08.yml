@@ -1,0 +1,4 @@
+- name: Harden windows 2008 member server
+  hosts: win2008
+  roles:
+    - role: windows_2008_MS 
